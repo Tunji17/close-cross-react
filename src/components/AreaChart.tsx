@@ -15,19 +15,15 @@ type dataSetType = {
 
 export const AreaChart: React.FC<Props> = (props) => {
   const dataSets: dataSetType[] = [];
-
   let previousColor = null;
   for (const element of props.data.sort((a, b) => a.x - b.x)) {
     const color = props.extractColor(element);
-
     let dataSet;
     if (dataSets.length === 0 || previousColor !== color) {
-      const previousDataSet =
-        dataSets.length !== 0 ? dataSets[dataSets.length - 1] : null;
+      const previousDataSet = dataSets.length !== 0 ? dataSets[dataSets.length - 1] : null;
       dataSet = {
         name: `${element.verdict} verdict`,
         color: color,
-        // copy ending point from previous dataset
         data:
           previousDataSet === null
             ? []
@@ -37,10 +33,8 @@ export const AreaChart: React.FC<Props> = (props) => {
     } else {
       dataSet = dataSets[dataSets.length - 1];
     }
-
     // add point
     dataSet.data.push([element.x, element.y]);
-
     // update previous element's color
     previousColor = color;
   }

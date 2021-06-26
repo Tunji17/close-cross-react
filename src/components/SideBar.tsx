@@ -1,42 +1,19 @@
-import React, {useState} from 'react';
 import { Row, Col, Image } from 'react-bootstrap';
 import { AreaChart } from './AreaChart';
 import { tradingData } from '../types';
-import stroke from '../images/Vector (Stroke).png';
-import trade from '../images/trade.png';
-import Wallet from '../images/Wallet.png';
+import lifeline from '../assets/lifeline.png';
+import trade from '../assets/trade.png';
+import wallet from '../assets/Wallet.png';
+import { tradingHistoryData } from '../mockdata';
 
-export interface IAppProps {
-}
-
-const tradingHistoryData = [
-  { x: 1, y: 200, verdict: "win" },
-  { x: 2, y: 305, verdict: "win" },
-  { x: 3, y: 407, verdict: "win" },
-  { x: 4, y: 402, verdict: "loss" },
-  { x: 5, y: 301, verdict: "loss" },
-  { x: 6, y: 412, verdict: "win" },
-  { x: 7, y: 518, verdict: "win" },
-  { x: 8, y: 740, verdict: "win" },
-  { x: 9, y: 600, verdict: "loss" },
-  { x: 10, y: 357, verdict: "loss" },
-  { x: 11, y: 690, verdict: "win" },
-  { x: 12, y: 807, verdict: "win" },
-  { x: 13, y: 920, verdict: "win" },
-  { x: 14, y: 490, verdict: "loss" },
-  { x: 15, y: 370, verdict: "loss" },
-  { x: 16, y: 260, verdict: "loss" }
-];
-
-export default function App (props: IAppProps) {
-  const [tradinghistory] = useState(tradingHistoryData);
+export const SideBar = () => {
   return (
     <div className='sidebar'>
       <Row>
         <Col style={{background: '#181B1C'}}>
           <div className="opentrades">
             <div className="opentext">
-              <Image src={stroke} />
+              <Image src={lifeline} />
               <span>OPEN TRADES</span>
               <i className="fas fa-angle-right"></i>
             </div>
@@ -76,7 +53,7 @@ export default function App (props: IAppProps) {
               </Row>
             </div>
             <AreaChart
-              data={tradinghistory}
+              data={tradingHistoryData}
               extractColor={(element: tradingData) => {
                 switch (element.verdict) {
                   case "win":
@@ -84,7 +61,7 @@ export default function App (props: IAppProps) {
                   case "loss":
                     return "#FA4F4F";
                   default:
-                    return "white";
+                    return "#000000";
                 }
               }}
             />
@@ -92,7 +69,7 @@ export default function App (props: IAppProps) {
 
           <div className="trainingwallet">
           <div className="opentext">
-              <Image src={Wallet} />
+              <Image src={wallet} />
               <span>TRAINING WALLET</span>
               <i className="fas fa-angle-right"></i>
             </div>
